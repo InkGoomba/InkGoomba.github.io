@@ -41,7 +41,7 @@ playButton.addEventListener("click", function(){
 stopButton.addEventListener("click", function(){
     videoPlayer.pause();
     videoPlayer.currentTime = 0;
-    videoPlayer.textContent = symbolPlay;
+    playButton.textContent = symbolPlay;
 })
 
 skipForwardButton.addEventListener("click", function(){
