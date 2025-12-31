@@ -6,11 +6,13 @@
     width: 100%;
     overflow: hidden;
     height: 3vh;
-    transition: height 0.5s;
+    transition: height 0.5s, background-color 0.5s;
+    background-color: rgba(0, 0, 0, 0.1);
 }
 
 .tab.open{
     height: 68vh;
+    background-color: rgba(0, 0, 0, 0.8);
 }
 
 .tab-title-box{
@@ -30,33 +32,13 @@
 h1{
     font-family: "Source Code Pro", Tahoma;
     font-size: x-large;
+    color: white;
 }
 
-#name{
-    background-color: aqua;
+#myCanvas{
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    background-color: rgb(34, 34, 34);
 }
-
-#about{
-    background-color: brown;
-}
-
-#experience{
-    background-color: bisque;
-}
-
-#skills{
-    background-color: chocolate;
-}
-
-#projects{
-    background-color: crimson;
-}
-
-#competitions{
-    background-color: chartreuse;
-}
-
-#contact{
-    background-color: cornsilk;
-}
-
