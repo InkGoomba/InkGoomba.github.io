@@ -4,12 +4,15 @@ let tabIdx = 0;
 
 initializeCanvas();
 tabs.forEach(hoverFunc);
+siteEntrance();
 
 function hoverFunc(tab){
     tab.addEventListener('click', () => {
-        tab.classList.add('open');
-        collapseOtherTabs(tab);
-        tabIdx = Array.prototype.indexOf.call(tabs, tab);
+        if(tab != tabs[0]){
+            tab.classList.add('open');
+            collapseOtherTabs(tab);
+            tabIdx = Array.prototype.indexOf.call(tabs, tab);
+        }
     })
 }
 
@@ -27,7 +30,7 @@ window.addEventListener('wheel', e => {
         tabs[tabIdx].classList.add('open');
         collapseOtherTabs(tabs[tabIdx]);
     } 
-    else if (e.deltaY < 0 && tabIdx > 0) {
+    else if (e.deltaY < 0 && tabIdx > 1) {
         tabIdx -= 1;
         tabs[tabIdx].classList.add('open');
         collapseOtherTabs(tabs[tabIdx]);
@@ -99,13 +102,17 @@ function drawTrace(x,y,x1,y1){
     ctx.beginPath();
     ctx.moveTo(x,y);
     ctx.lineTo(x1,y1);
+    ctx.moveTo(x+20, y+20);
+    ctx.lineTo(x1+20, y1+20);
+    ctx.moveTo(x-20, y-20);
+    ctx.lineTo(x1-20, y1-20);
     ctx.stroke();
 }
 
 async function runTracesLoop() {
     while (true) {
         await startTraces();
-        await new Promise(r => setTimeout(r, 200));
+        await new Promise(r => setTimeout(r, 1000));
     }
 }
 
@@ -117,4 +124,22 @@ function initializeCanvas(){
     traceCanvas.width = Math.floor(window.devicePixelRatio * window.innerWidth);
     traceCanvas.height = Math.floor(window.devicePixelRatio * window.innerHeight);
     runTracesLoop();
+}
+
+function siteEntrance(){
+    setTimeout(() => {
+        nameBox = document.getElementById("name").children[0];
+        nameBox.style.opacity = "0";
+        bigName = document.querySelector(".title-name");
+        bigName.classList.add('title-name-animation'); 
+    }, 50);
+    setTimeout(() => {
+        bigName.classList.remove('title-name-animation'); 
+    }, 2550);
+    setTimeout(() => {
+        nameBox.style.transition = "opacity 1s";
+        nameBox.style.opacity = "1";
+        tabs[0].style.transition = "height 1.5s";
+        tabs[0].classList.remove('full');  
+    }, 3050);
 }

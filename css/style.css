@@ -15,6 +15,10 @@
     background-color: rgba(0, 0, 0, 0.8);
 }
 
+.tab.full{
+    height: 100vh;
+}
+
 .tab-title-box{
     text-align: center;
     display: flex;
@@ -41,4 +45,16 @@ h1{
     left: 0;
     z-index: -1;
     background-color: rgb(34, 34, 34);
+}
+
+.title-name{
+    text-align: center;
+    padding-top: 20%;
+    padding-bottom: 20%;
+    font-size: 1%;
+    transition: font-size 2s;
+}
+
+.title-name-animation{
+    font-size: 500%;
 }
