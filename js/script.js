@@ -1,6 +1,7 @@
 const tabs = document.querySelectorAll(".tab");
 const traceCanvas = document.getElementById("myCanvas");
 let tabIdx = 0;
+let scrollAccumulator = 0;
 
 initializeCanvas();
 tabs.forEach(hoverFunc);
@@ -25,15 +26,19 @@ function collapseOtherTabs(openTab){
 }
 
 window.addEventListener('wheel', e => {
-    if (e.deltaY > 0 && tabIdx < tabs.length) {
+    scrollAccumulator += e.deltaY;
+    console.log(scrollAccumulator);
+    if (scrollAccumulator > 20 && tabIdx < tabs.length) {
         tabIdx += 1;
         tabs[tabIdx].classList.add('open');
         collapseOtherTabs(tabs[tabIdx]);
+        scrollAccumulator = 0;
     } 
-    else if (e.deltaY < 0 && tabIdx > 1) {
+    else if (scrollAccumulator < -20 && tabIdx > 1) {
         tabIdx -= 1;
         tabs[tabIdx].classList.add('open');
         collapseOtherTabs(tabs[tabIdx]);
+        scrollAccumulator = 0;
     }
 }, { passive: true });
 
