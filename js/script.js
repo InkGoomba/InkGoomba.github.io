@@ -148,3 +148,9 @@ function siteEntrance(){
         tabs[0].classList.remove('full');  
     }, 3050);
 }
+
+async function testeetes(params) {
+    const response = await fetch("https://api.weather.gov/gridpoints/TOP/31,80/forecast");
+    const data = await response.json();
+    testtext.textContent = data['properties'];
+}
