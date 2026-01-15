@@ -6,6 +6,7 @@ let scrollAccumulator = 0;
 initializeCanvas();
 tabs.forEach(hoverFunc);
 siteEntrance();
+testeetes();
 
 function hoverFunc(tab){
     tab.addEventListener('click', () => {
@@ -27,7 +28,6 @@ function collapseOtherTabs(openTab){
 
 window.addEventListener('wheel', e => {
     scrollAccumulator += e.deltaY;
-    console.log(scrollAccumulator);
     if (scrollAccumulator > 20 && tabIdx < tabs.length) {
         tabIdx += 1;
         tabs[tabIdx].classList.add('open');
