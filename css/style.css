@@ -58,3 +58,28 @@ h1{
 .title-name-animation{
     font-size: 500%;
 }
+
+#about-me-picture{
+    width: 100%;
+    height: 100%;
+    border-radius: 100%;
+}
+
+.tab-body{
+    display: grid;
+    margin: 6rem 2rem 2rem 2rem;
+    column-gap: 1rem;
+}
+
+.tab-body.about{
+    grid-template-columns: 1fr 3fr;
+}
+
+p{
+    font-family: "Source Code Pro", Tahoma;
+    color: white;
+}
+
+.large-p{
+    font-size: xx-large;
+}
