@@ -27,13 +27,13 @@ function collapseOtherTabs(openTab){
 
 window.addEventListener('wheel', e => {
     scrollAccumulator += e.deltaY;
-    if (scrollAccumulator > 20 && tabIdx < tabs.length) {
+    if(scrollAccumulator > 20 && tabIdx < tabs.length){
         tabIdx += 1;
         tabs[tabIdx].classList.add('open');
         collapseOtherTabs(tabs[tabIdx]);
         scrollAccumulator = 0;
     } 
-    else if (scrollAccumulator < -20 && tabIdx > 1) {
+    else if(scrollAccumulator < -20 && tabIdx > 1){
         tabIdx -= 1;
         tabs[tabIdx].classList.add('open');
         collapseOtherTabs(tabs[tabIdx]);
@@ -45,6 +45,7 @@ function startTraces(){
     let x = Math.floor(Math.random() * traceCanvas.width);
     let y = Math.floor(Math.random() * traceCanvas.height);
     let stepsLeft = Math.floor((Math.random() * 10) + 2);
+    const qty = Math.floor(Math.random() * 3) + 1;
 
     function nextSegment(){
         if (stepsLeft <= 0) return;
@@ -63,36 +64,36 @@ function startTraces(){
 
         // compute next endpoint for one step (10px)
         let nx = x, ny = y;
-        if (dir === 0){
+        if(dir === 0){
             nx = x + 1;
         }
-        else if (dir === 1){
+        else if(dir === 1){
             ny = y + 1;
         }
-        else if (dir === 2){
+        else if(dir === 2){
             nx = x - 1;
         }
-        else if (dir === 3){
+        else if(dir === 3){
             ny = y - 1;
         }
-        else if (dir === 4){
+        else if(dir === 4){
             nx = x + 1;
             ny = y - 1;
         }
-        else if (dir === 5){
+        else if(dir === 5){
             nx = x + 1;
             ny = y + 1;
         }
-        else if (dir === 6){
+        else if(dir === 6){
             nx = x - 1;
             ny = y + 1;
         }
-        else if (dir === 7){
+        else if(dir === 7){
             nx = x - 1;
             ny = y - 1;
         } 
 
-        drawTrace(x, y, nx, ny);
+        drawTrace(x, y, nx, ny, qty);
         x = nx; y = ny;
 
         window.requestAnimationFrame(() => stepLoop(dir, remaining - 1));
@@ -100,16 +101,20 @@ function startTraces(){
   nextSegment();
 }
 
-function drawTrace(x,y,x1,y1){
+function drawTrace(x,y,x1,y1,qty){
     let ctx = traceCanvas.getContext("2d");
     ctx.strokeStyle = "#00aeb6";
     ctx.beginPath();
     ctx.moveTo(x,y);
     ctx.lineTo(x1,y1);
-    ctx.moveTo(x+20, y+20);
-    ctx.lineTo(x1+20, y1+20);
-    ctx.moveTo(x-20, y-20);
-    ctx.lineTo(x1-20, y1-20);
+    if(qty > 1){
+        ctx.moveTo(x+20, y+20);
+        ctx.lineTo(x1+20, y1+20);
+    }
+    if(qty > 2){
+        ctx.moveTo(x-20, y-20);
+        ctx.lineTo(x1-20, y1-20);
+    }
     ctx.stroke();
 }
 
